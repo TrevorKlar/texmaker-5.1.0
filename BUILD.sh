@@ -24,7 +24,8 @@ function main {
 	echo "Texmaker compilation:"
 	echo "----------------------------------------"
 	while [[ -z ${QTDIR} ]]; do # loop until input is provided
-		read -p "Enter full path to QT (qmake): " QTDIR # get path to qmake
+		read -p "Enter full path to QT (qmake) (press y to use /usr/local/bin/Qt/5.14.0/gcc_64/bin): " QTDIR # get path to qmake
+			if [ "$QTDIR" == "y" ]; then QTDIR="/usr/local/bin/Qt/5.14.0/gcc_64/bin"; fi
 			if [[ ! -f ${QTDIR}/qmake ]]; then # check if gmake is present in the provided path
 				echo -ne "${txtred}Error${txtrst}: Unable to find qmake in \"${QTDIR}\"\n"
 				QTDIR=""
@@ -55,13 +56,16 @@ function main {
 
 	if [[ ${SYSTEM} == "1" ]]; then # run if linux is detected
 		while [[ -z ${PREFIX} ]]; do # get installation path for Texmaker
-			read -p "Enter installation path (example: /usr , /usr/local or /opt): " PREFIX
+			read -p "Enter installation path (example: /usr , /usr/local or /opt) (press y for /usr/local): " PREFIX
+			if [ "$PREFIX" == "y" ]; then PREFIX='/usr/local'; fi
 		done
 		while [[ -z ${DESKTOPDIR} ]]; do # get installation path for .desktop file
-			read -p "Enter directory for the desktop file (example: /usr/share/applications): " DESKTOPDIR
+			read -p "Enter directory for the desktop file (example: /usr/share/applications) (press y for /home/trevor/Desktop): " DESKTOPDIR
+			if [ "$DESKTOPDIR" == "y" ]; then DESKTOPDIR='/home/trevor/Desktop'; fi
 		done
 		while [[ -z ${ICONDIR} ]]; do # get installation path for Desktop-icon
-			read -p "Enter directory for the icon file (example: /usr/share/pixmaps): " ICONDIR
+			read -p "Enter directory for the icon file (example: /usr/share/pixmaps) (press y for default): " ICONDIR
+			if [ "$ICONDIR" == "y" ]; then ICONDIR='/usr/share/pixmaps'; fi
 		done
 		${QTDIR}/qmake PREFIX=${PREFIX} DESKTOPDIR=${DESKTOPDIR} ICONDIR=${ICONDIR} texmaker.pro # run qmake
 		QMAKE_EXIT="$?" # get exit code of qmake

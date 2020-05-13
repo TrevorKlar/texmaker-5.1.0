@@ -1,0 +1,7 @@
+Makefile
+.moc/
+.obj/
+.ui/
+qrc_texmaker.cpp
+texmaker
+
