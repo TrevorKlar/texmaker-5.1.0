@@ -1,0 +1,6 @@
+- fixed bug where \left and \right keyboard shortcuts would add a trailing space which needed to be deleted every time.
+- changed Ctrl+Shift+T to \text{} instead of the far-less used \texttt{}.
+- added shortcut: Ctrl+Shift+B inserts \big
+- added some sensible defaults to BUILD.sh, so you don't have to go figure out where to put things. 
+
+
